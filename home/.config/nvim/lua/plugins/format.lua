@@ -22,6 +22,7 @@ require("conform").setup({
 		markdown = { "prettier" },
 		graphql = { "prettier" },
 		lua = { "stylua" },
+		nix = { "alejandra" },
 		astro = { "prettierd", "prettier" },
 		c = { "clang_format" },
 		go = { "gofmt" },

@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
-
-let
-  dotfiles = "${config.home.homeDirectory}/.dotfiles_nix";
-in
-
 {
+  config,
+  pkgs,
+  ...
+}: let
+  dotfiles = "${config.home.homeDirectory}/.dotfiles_nix";
+in {
   home.username = "tony";
   home.homeDirectory = "/Users/tony";
 
@@ -30,7 +30,7 @@ in
   home.sessionVariables.EDITOR = "nvim";
 
   programs.zsh = {
-    enable = true; 
+    enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
@@ -54,10 +54,10 @@ in
       cmd_duration.format = "[$duration]($style) ";
     };
   };
-  
+
   programs.zoxide = {
     enable = true;
-    enableZshIntegration = true;   # since you're on zsh
+    enableZshIntegration = true; # since you're on zsh
   };
 
   programs.home-manager.enable = true;
@@ -66,4 +66,3 @@ in
   home.file.".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty";
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
 }
-

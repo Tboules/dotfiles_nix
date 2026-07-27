@@ -10,19 +10,24 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-homebrew }: {
+  outputs = inputs @ {
+    self,
+    nix-darwin,
+    nixpkgs,
+    home-manager,
+    nix-homebrew,
+  }: {
     darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
       modules = [
-	./configuration.nix
-	nix-homebrew.darwinModules.nix-homebrew 
-	home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.tony = ./home.nix;
-          }	
+        ./configuration.nix
+        nix-homebrew.darwinModules.nix-homebrew
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.tony = ./home.nix;
+        }
       ];
     };
   };
 }
-
