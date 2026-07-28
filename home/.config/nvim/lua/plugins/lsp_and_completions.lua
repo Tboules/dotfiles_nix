@@ -136,8 +136,8 @@ require("mason-lspconfig").setup()
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
 	-- You can add other tools here that you want Mason to install
-	stylua = {},
-	alejandra = {},
+	"stylua",
+	"alejandra",
 })
 
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

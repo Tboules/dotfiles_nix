@@ -39,6 +39,7 @@
       "claude-code"
       "spotify"
       "karabiner-elements"
+      "obsidian"
     ];
   };
 }

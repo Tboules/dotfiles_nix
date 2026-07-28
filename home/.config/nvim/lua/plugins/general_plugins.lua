@@ -8,7 +8,7 @@ vim.pack.add({
 	gh("windwp/nvim-autopairs"),
 })
 
--- THEME
+--THEME
 require("nightfox").setup({
 	options = {
 		transparent = true,

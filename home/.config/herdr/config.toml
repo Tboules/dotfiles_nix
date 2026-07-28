@@ -4,6 +4,7 @@ focus_pane_left = 'ctrl+h'
 focus_pane_right = 'ctrl+l'
 focus_pane_up = 'ctrl+k'
 focus_pane_down = 'ctrl+j'
+next_agent = 'ctrl+n'
 
 [theme]
 name = 'terminal'
