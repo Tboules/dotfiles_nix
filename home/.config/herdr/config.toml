@@ -1,0 +1,7 @@
+onbaording = false
+
+[terminal]
+default_shell = 'zsh'
+
+[keys]
+prefix = "ctrl+a"
