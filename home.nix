@@ -38,7 +38,8 @@ in {
       ls = "eza --icons";
       ll = "eza -lg --icons";
       lt = "eza -lTag --level=2 --icons";
-      rb = "~/Documents/code/dotfiles_nix/rebuild.sh";
+      rb = "~/Documents/code/dotfiles_nix/scripts/rebuild.sh";
+      test = "echo 'test'";
     };
   };
 
@@ -65,5 +66,5 @@ in {
   # Edit-in-place: the real file stays in my dotfiles repo, but .config always points at it.
   home.file.".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty";
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
-  home.file.".config/herdr".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr";
+  home.file.".config/herdr/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr/config.toml";
 }

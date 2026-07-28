@@ -36,6 +36,7 @@
     casks = [
       "ghostty"
       "claude-code"
+      "spotify"
     ];
   };
 }

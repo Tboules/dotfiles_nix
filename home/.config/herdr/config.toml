@@ -1,7 +1,17 @@
-onbaording = false
-
-[terminal]
-default_shell = 'zsh'
-
 [keys]
 prefix = "ctrl+a"
+focus_pane_left = 'ctrl+h'
+focus_pane_right = 'ctrl+l'
+focus_pane_up = 'ctrl+k'
+focus_pane_down = 'ctrl+j'
+
+[theme]
+name = 'terminal'
+
+[ui]
+sidebar_collapsed_mode = 'hidden'
+sidebar_start_collapsed = true
+pane_gaps = false
+
+[keys.indexed]
+workspaces = "alt"
