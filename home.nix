@@ -39,7 +39,7 @@ in {
       ll = "eza -lg --icons";
       lt = "eza -lTag --level=2 --icons";
       rb = "~/Documents/code/dotfiles_nix/scripts/rebuild.sh";
-      test = "echo 'test'";
+      hn = "~/Documents/code/dotfiles_nix/scripts/herdr-session.sh";
     };
   };
 
@@ -67,4 +67,5 @@ in {
   home.file.".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty";
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
   home.file.".config/herdr/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr/config.toml";
+  home.file.".config/karabiner/karabiner.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner/karabiner.json";
 }
