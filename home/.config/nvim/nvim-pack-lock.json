@@ -99,6 +99,10 @@
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
     },
+    "vim-herdr-navigation": {
+      "rev": "53e318c772c4d3b7fbd904ac43bcf3e5b5d8b244",
+      "src": "https://github.com/paulbkim-dev/vim-herdr-navigation"
+    },
     "vim-tmux-navigator": {
       "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
       "src": "https://github.com/christoomey/vim-tmux-navigator"
