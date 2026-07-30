@@ -25,6 +25,9 @@ in {
     python3
     dotnetCorePackages.sdk_8_0
     tree-sitter
+    bat
+    btop
+    uv
   ];
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
@@ -40,6 +43,7 @@ in {
       lt = "eza -lTag --level=2 --icons";
       rb = "~/Documents/code/dotfiles_nix/scripts/rebuild.sh";
       hn = "~/Documents/code/dotfiles_nix/scripts/herdr-session.sh";
+      ".." = "cd ..";
     };
   };
 
@@ -49,7 +53,7 @@ in {
       add_newline = true;
       format = "$directory$git_branch$git_status$cmd_duration$line_break$character";
       character = {
-        success_symbol = "[❯](purple)";
+        success_symbol = "[➜](bold green)";
         error_symbol = "[❯](red)";
       };
       cmd_duration.format = "[$duration]($style) ";

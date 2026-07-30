@@ -88,7 +88,16 @@ local servers = {
 	sqls = {},
 	clangd = {},
 	gopls = {},
-	pyright = {},
+	basedpyright = {
+		settings = {
+			basedpyright = { disableOrganizeImports = true },
+		},
+	},
+	ruff = {
+		on_init = function(client)
+			client.server_capabilities.hoverProvider = false
+		end,
+	},
 	html = {
 		filetypes = {
 			"html",

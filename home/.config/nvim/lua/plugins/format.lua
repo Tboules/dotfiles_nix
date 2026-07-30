@@ -26,7 +26,7 @@ require("conform").setup({
 		astro = { "prettierd", "prettier" },
 		c = { "clang_format" },
 		go = { "gofmt" },
-		python = { "black" },
+		python = { "ruff_organize_imports", "ruff_format" },
 		sh = { "beautysh", "shfmt" },
 		sql = { "sqlfmt" },
 	},
