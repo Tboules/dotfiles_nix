@@ -17,6 +17,11 @@
       AppleShowAllExtensions = true;
       "com.apple.swipescrolldirection" = false;
     };
+    CustomUserPreferences = {
+      NSGlobalDomain = {
+        "com.apple.scrollwheel.scaling" = true;
+      };
+    };
     dock.autohide = true;
     finder.FXPreferredViewStyle = "Nlsv"; # list view by default
     controlcenter = {
@@ -44,6 +49,7 @@
       "spotify"
       "karabiner-elements"
       "obsidian"
+      "zen"
     ];
   };
 }
