@@ -132,12 +132,17 @@ local servers = {
 			},
 		},
 	},
-	nil_ls = {
+}
+
+-- nil builds from source and its build script shells out to `nix` for the builtin
+-- list, so it can only be installed on machines that actually have nix.
+if vim.fn.executable("nix") == 1 then
+	servers.nil_ls = {
 		on_init = function(client)
 			client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by alejandra)
 		end,
-	},
-}
+	}
+end
 
 require("mason").setup({})
 require("mason-lspconfig").setup()
