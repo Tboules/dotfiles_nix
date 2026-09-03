@@ -106,6 +106,23 @@ local servers = {
 		},
 	},
 	ts_ls = {},
+	roslyn_ls = {
+		settings = {
+			-- lspconfig defaults to fullSolution, which keeps the server busy
+			-- re-analyzing every project on each edit
+			["csharp|background_analysis"] = {
+				dotnet_analyzer_diagnostics_scope = "openFiles",
+				dotnet_compiler_diagnostics_scope = "openFiles",
+			},
+			["csharp|code_lens"] = {
+				dotnet_enable_references_code_lens = false,
+			},
+			["csharp|completion"] = {
+				dotnet_show_completion_items_from_unimported_namespaces = false,
+			},
+		},
+	},
+	astro = {},
 	tailwindcss = {
 		filetypes = {
 			"astro",
@@ -189,6 +206,6 @@ cmp.setup({
 		},
 	},
 	snippets = { preset = "luasnip" },
-	fuzzy = { implementation = "lua" },
+	fuzzy = { implementation = "prefer_rust_with_warning" },
 	signature = { enabled = true },
 })

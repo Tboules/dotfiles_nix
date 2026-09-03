@@ -33,4 +33,3 @@ vim.o.conceallevel = 1
 
 -- autoread config to help the buffer autoreload when files are changed by claude
 vim.o.autoread = true
-
