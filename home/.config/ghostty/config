@@ -1,12 +1,9 @@
 theme = Nightfox
 
-font-size = 18
+font-size = 17
 font-family = "JetBrainsMono Nerd Font Mono"
 
 macos-titlebar-style = "hidden"
 
 window-padding-x = 8
 window-padding-y = 16
-
-background-opacity = 0.90
-background-blur = true
