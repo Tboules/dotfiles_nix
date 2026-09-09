@@ -15,6 +15,7 @@ in {
     fzf
     ripgrep
     fd
+    jq
     lazygit
     neovim
     nerd-fonts.jetbrains-mono
@@ -23,7 +24,7 @@ in {
     go
     nodejs
     python3
-    dotnetCorePackages.sdk_8_0
+    dotnetCorePackages.sdk_10_0
     tree-sitter
     bat
     btop
