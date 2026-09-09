@@ -51,6 +51,8 @@
       "obsidian"
       "zen"
       "raycast"
+      "microsoft-teams"
+      "opensuperwhisper"
     ];
   };
 }
