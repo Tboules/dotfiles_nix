@@ -50,6 +50,7 @@
       "karabiner-elements"
       "obsidian"
       "zen"
+      "raycast"
     ];
   };
 }

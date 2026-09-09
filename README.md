@@ -7,7 +7,7 @@ Declarative macOS (Apple Silicon) setup using `nix-darwin` + `home-manager` +
 
 - System defaults (`configuration.nix`): dark mode, key repeat rate, dock/finder prefs, etc.
 - Homebrew, installed and managed *by Nix* (`nix-homebrew`): casks (ghostty, claude-code,
-  spotify, karabiner-elements, obsidian, zen) and brews (`herdr`).
+  spotify, karabiner-elements, obsidian, zen, raycast) and brews (`herdr`).
 - User environment (`home.nix`): shell (zsh + starship + zoxide), CLI tools (ripgrep, fd,
   eza, lazygit, fzf, bat, btop, uv), language toolchains (rust, go, node, python, dotnet 10),
   Neovim, and fonts.
@@ -82,6 +82,18 @@ Declarative macOS (Apple Silicon) setup using `nix-darwin` + `home-manager` +
   herdr plugin install paulbkim-dev/vim-herdr-navigation \
     --ref 53e318c772c4d3b7fbd904ac43bcf3e5b5d8b244 -y
   ```
+
+- **Raycast's settings/extensions/snippets/hotkeys** can't be declared in Nix — Raycast
+  stores them in encrypted SQLite files, not plain config files, and has no CLI for
+  import/export. The only supported path is the GUI: **Raycast → Settings → Advanced →
+  Export/Import Data**. Workflow for keeping this in the dotfiles repo:
+
+  1. On your current machine: Settings → Advanced → Export Data, save the `.rayconfig`
+     file into this repo (e.g. `home/raycast/backup.rayconfig`), and commit it.
+  2. On a new machine, after `rb` installs the Raycast cask: open Raycast → Settings →
+     Advanced → Import Data, and point it at that file.
+
+  This isn't automatic — re-export and commit periodically if your Raycast setup changes.
 
 ## Day-to-day
 
