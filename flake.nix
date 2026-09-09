@@ -16,18 +16,26 @@
     nixpkgs,
     home-manager,
     nix-homebrew,
-  }: {
-    darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
-      modules = [
-        ./configuration.nix
-        nix-homebrew.darwinModules.nix-homebrew
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.tony = ./home.nix;
-        }
-      ];
+  }: let
+    mkDarwinConfig = username:
+      nix-darwin.lib.darwinSystem {
+        specialArgs = {inherit username;};
+        modules = [
+          ./configuration.nix
+          nix-homebrew.darwinModules.nix-homebrew
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = ./home.nix;
+            home-manager.extraSpecialArgs = {inherit username;};
+          }
+        ];
+      };
+  in {
+    darwinConfigurations = {
+      tony = mkDarwinConfig "tony";
+      tonyboules = mkDarwinConfig "tonyboules";
     };
   };
 }
