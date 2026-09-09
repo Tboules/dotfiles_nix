@@ -1,11 +1,11 @@
-{...}: {
+{username, ...}: {
   nix.enable = false;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  system.primaryUser = "tony";
-  users.users.tony = {
-    home = "/Users/tony";
+  system.primaryUser = username;
+  users.users.${username} = {
+    home = "/Users/${username}";
   };
   system.stateVersion = 6;
   system.defaults = {
@@ -32,7 +32,7 @@
 
   nix-homebrew = {
     enable = true;
-    user = "tony";
+    user = username;
   };
   homebrew = {
     enable = true;
