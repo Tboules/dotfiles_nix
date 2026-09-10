@@ -53,6 +53,7 @@
       "raycast"
       "microsoft-teams"
       "opensuperwhisper"
+      "datagrip"
     ];
   };
 }

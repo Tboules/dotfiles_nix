@@ -1,10 +1,12 @@
 {
   config,
+  lib,
   pkgs,
   username,
   ...
 }: let
   dotfiles = "${config.home.homeDirectory}/.dotfiles_nix";
+  wallpaper = "${dotfiles}/wallpapers/wp1933958-pixel-art-wallpapers.jpg";
 in {
   home.username = username;
   home.homeDirectory = "/Users/${username}";
@@ -74,4 +76,8 @@ in {
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
   home.file.".config/herdr/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr/config.toml";
   home.file.".config/karabiner/karabiner.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner/karabiner.json";
+
+  home.activation.setWallpaper = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    $DRY_RUN_CMD /usr/bin/osascript -e 'tell application "System Events" to tell every desktop to set picture to "${wallpaper}"' $VERBOSE_ARG
+  '';
 }
