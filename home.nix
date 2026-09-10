@@ -34,7 +34,11 @@ in {
     uv
   ];
   fonts.fontconfig.enable = true;
-  home.sessionVariables.EDITOR = "nvim";
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
+    DOTNET_ROOT_ARM64 = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
+  };
 
   programs.zsh = {
     enable = true;
@@ -70,6 +74,24 @@ in {
   };
 
   programs.home-manager.enable = true;
+
+  programs.git = {
+    enable = true;
+    userName = "Tboules";
+    userEmail = "tboules@gmail.com"; # fallback/default identity
+
+    includes = [
+      {
+        condition = "hasconfig:remote.*.url:git@github.com-tmitboules:*/**";
+        contents = {
+          user = {
+            name = "tmitboules";
+            email = "tony.boules@trafficmanagement.com";
+          };
+        };
+      }
+    ];
+  };
 
   # Edit-in-place: the real file stays in my dotfiles repo, but .config always points at it.
   home.file.".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty";
