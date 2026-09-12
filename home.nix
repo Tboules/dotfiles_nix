@@ -6,11 +6,7 @@
   ...
 }: let
   dotfiles = "${config.home.homeDirectory}/.dotfiles_nix";
-  # Copied into the Nix store (not referenced from ~/Documents) because macOS's
-  # WallpaperAgent can't read files in TCC-protected folders like Documents/Desktop/
-  # Downloads — it fails silently and renders black even though System Settings
-  # still shows the correct picture path.
-  wallpaper = ./wallpapers/wp1933958-pixel-art-wallpapers.jpg;
+  wallpaper = "${dotfiles}/wallpapers/wp1933958-pixel-art-wallpapers.jpg";
 in {
   home.username = username;
   home.homeDirectory = "/Users/${username}";
