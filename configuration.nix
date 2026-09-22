@@ -42,6 +42,10 @@
     onActivation.extraFlags = ["--force"];
     brews = [
       "herdr"
+      # container runtime for tmi-mcp (colima = free Docker Desktop alternative)
+      "colima"
+      "docker"
+      "docker-compose"
     ];
     casks = [
       "ghostty"

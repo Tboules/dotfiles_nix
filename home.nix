@@ -26,6 +26,7 @@ in {
     rustc
     go
     nodejs
+    pnpm
     python3
     dotnetCorePackages.sdk_10_0
     tree-sitter
@@ -98,8 +99,31 @@ in {
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
   home.file.".config/herdr/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr/config.toml";
   home.file.".config/karabiner/karabiner.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/karabiner/karabiner.json";
+  home.file.".config/ideavim/ideavimrc".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ideavim/ideavimrc";
 
   home.activation.setWallpaper = lib.hm.dag.entryAfter ["writeBoundary"] ''
     $DRY_RUN_CMD /usr/bin/osascript -e 'tell application "System Events" to tell every desktop to set picture to "${wallpaper}"' $VERBOSE_ARG
+  '';
+
+  # "Move focus to next window" (cycle windows of the same app) -> Hyper+C.
+  # Symbolic hotkey 27; parameters are [ascii, keycode, modifiers]:
+  # 99 = 'c', 8 = keycode for C, 1966080 = shift+ctrl+opt+cmd (Hyper).
+  # -dict-add merges just this entry instead of replacing all hotkeys.
+  home.activation.setAppWindowSwitchHotkey = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    $DRY_RUN_CMD /usr/bin/defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 '
+      <dict>
+        <key>enabled</key><true/>
+        <key>value</key>
+        <dict>
+          <key>type</key><string>standard</string>
+          <key>parameters</key>
+          <array>
+            <integer>99</integer>
+            <integer>8</integer>
+            <integer>1966080</integer>
+          </array>
+        </dict>
+      </dict>'
+    $DRY_RUN_CMD /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
 }

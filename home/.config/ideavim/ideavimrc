@@ -1,0 +1,64 @@
+" IdeaVim config for DataGrip — mirrors nvim (lua/core/options.lua + keymaps.lua)
+
+let mapleader = " "
+
+" ----- options (from core/options.lua) -----
+set relativenumber
+set number
+set clipboard+=unnamedplus   " yank/delete/paste share the system clipboard
+set clipboard+=ideaput       " paste via IDE so formatting/indent is applied
+set nohlsearch
+set ignorecase
+set smartcase
+set scrolloff=4
+set incsearch
+
+" IdeaVim niceties
+set ideajoin                 " J uses the IDE's smart line-join
+set idearefactormode=keep
+
+" ----- plugin emulations -----
+set surround
+set commentary
+set highlightedyank
+
+" ----- keymaps (from core/keymaps.lua) -----
+nnoremap <leader>nh :nohl<CR>
+nnoremap <leader>w :w<CR>
+
+" window management
+nnoremap <leader>sv <C-w>v
+nnoremap <leader>sh <C-w>s
+nnoremap <leader>se <C-w>=
+nnoremap <leader>sx <C-w>c
+
+" keep cursor centered on half-page jumps
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" move selected lines up/down (IDE action keeps selection + reindents)
+vmap J <Action>(MoveLineDown)
+vmap K <Action>(MoveLineUp)
+
+" insert blank line without entering insert mode
+nmap <leader>o <Action>(EditorStartNewLine)
+nmap <leader>O <Action>(EditorStartNewLineBefore)
+
+" ----- LSP-style maps -> IDE actions -----
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoTypeDeclaration)
+nmap gI <Action>(GotoImplementation)
+nmap gr <Action>(ShowUsages)
+nmap K <Action>(QuickJavaDoc)
+nmap <leader>rn <Action>(RenameElement)
+nmap <leader>ca <Action>(ShowIntentionActions)
+
+" ----- pickers (snacks.nvim equivalents) -----
+nmap <leader><space> <Action>(GotoFile)
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>sf <Action>(GotoFile)
+nmap <leader>sg <Action>(FindInPath)
+nmap <leader>/ <Action>(FindInPath)
+nmap <leader>, <Action>(RecentFiles)
+nmap <leader>fb <Action>(RecentFiles)
+nmap <leader>e <Action>(SelectInProjectView)
