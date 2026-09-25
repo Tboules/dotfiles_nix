@@ -49,7 +49,7 @@
     ];
     casks = [
       "ghostty"
-      "claude-code"
+      "claude-code@latest"
       "spotify"
       "karabiner-elements"
       "obsidian"
