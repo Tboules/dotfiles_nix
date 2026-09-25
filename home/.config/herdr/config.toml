@@ -1,6 +1,18 @@
 onboarding = false
 [keys]
 prefix = "ctrl+a"
+# Settings moved off prefix+s; the tmux-style jump popup below takes its place.
+settings = "prefix+shift+s"
+
+# One-keystroke jump picker (tmux prefix+s style): popup listing spaces on
+# 1-9 and agents on shift+1-9; a single keypress focuses the target and
+# closes the popup. Plugin lives at herdr-plugins/jump in this repo
+# (registered via `herdr plugin link`).
+[[keys.command]]
+key = "prefix+s"
+type = "plugin_action"
+command = "tboules.jump.open"
+description = "jump to space/agent"
 
 # Ctrl+h/j/k/l navigate Vim splits while Vim is focused, and fall through to
 # herdr panes at edges (via the vim-herdr-navigation plugin).

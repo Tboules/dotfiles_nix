@@ -1,0 +1,20 @@
+id = "tboules.jump"
+name = "Jump"
+version = "0.4.1"
+min_herdr_version = "0.9.0"
+description = "One-keystroke jump popup: spaces on 1-9, agents on alt+1-9"
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "open"
+title = "Open jump picker"
+contexts = ["global"]
+command = ["node", "open.js"]
+
+[[panes]]
+id = "picker"
+title = "Jump"
+# Height omitted on purpose: the popup defaults to half the terminal height.
+placement = "popup"
+width = "50%"
+command = ["node", "jump.js"]
