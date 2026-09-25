@@ -42,7 +42,7 @@
     onActivation.extraFlags = ["--force"];
     brews = [
       "herdr"
-      # container runtime for tmi-mcp (colima = free Docker Desktop alternative)
+      "zapp"
       "colima"
       "docker"
       "docker-compose"
