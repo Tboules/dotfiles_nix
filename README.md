@@ -98,6 +98,10 @@ Declarative macOS (Apple Silicon) setup using `nix-darwin` + `home-manager` +
 ## Day-to-day
 
 - `rb` — rebuild and switch after editing `home.nix` or `configuration.nix`.
+- `rb` restarts the herdr server automatically when the rebuild upgraded herdr (the old
+  server loses macOS Full Disk Access once brew deletes its binary, which breaks everything
+  under `~/Documents`). If `rb` was run inside a herdr pane it can't do this safely and will
+  tell you to run `~/.dotfiles_nix/scripts/herdr-restart.sh` from a plain Ghostty window.
 - `hn <label>` — open/create a herdr workspace laid out with neovim/shell/git/claude tabs.
 - Editing anything under `home/.config/{ghostty,nvim,herdr,karabiner}` takes effect without
   a rebuild, since those paths are symlinked directly into the repo.
