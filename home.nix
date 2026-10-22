@@ -41,6 +41,8 @@ in {
     DOTNET_ROOT_ARM64 = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
   };
 
+  # NIX managed programs -- START
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -93,6 +95,38 @@ in {
       }
     ];
   };
+
+  programs.newsboat = {
+    enable = true;
+    urls = [
+      {
+        url = "https://finleypath.substack.com/feed";
+        tags = ["substack"];
+      }
+      {
+        url = "https://davidbentleyhart.substack.com/feed";
+        tags = ["substack"];
+      }
+      {
+        url = "https://frstephenfreeman567039.substack.com/feed";
+        tags = ["substack"];
+      }
+    ];
+    extraConfig = ''
+      bind-key j down
+      bind-key k up
+      bind-key J next-feed
+      bind-key K prev-feed
+      bind-key g home
+      bind-key G end
+      bind-key ^D pagedown
+      bind-key ^U pageup
+      bind-key l open
+      bind-key h quit
+    '';
+  };
+
+  # NIX managed programs -- END
 
   # Edit-in-place: the real file stays in my dotfiles repo, but .config always points at it.
   home.file.".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/ghostty";

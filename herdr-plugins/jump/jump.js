@@ -98,9 +98,33 @@ function agentRow({ focused, key, wsLabel, title, status }) {
 
 // -------------------------------------------------------------- input
 
-// Alt+key arrives as ESC followed by the key (usually in one chunk); a lone
-// ESC is cancel. Returns "M-<key>" for alt chords, the character otherwise,
-// or null for cancel.
+// macOS option-composed digits (right option, or option-as-alt off): ⌥1-9.
+const OPTION_DIGITS = { "¡": 1, "™": 2, "£": 3, "¢": 4, "∞": 5, "§": 6, "¶": 7, "•": 8, ª: 9 };
+
+// Decode one input chunk. Alt+key arrives as legacy ESC+key, kitty keyboard
+// protocol CSI u (ESC [ 49 ; 3 u), or xterm modifyOtherKeys (ESC [ 27 ; 3 ; 49 ~),
+// depending on what herdr negotiated with the outer terminal. Returns
+// "M-<key>" for alt chords, the character otherwise, null for cancel, or
+// undefined for input to ignore (e.g. key-release events).
+function decodeKey(s) {
+  const csiU = s.match(/^\x1b\[(\d+)(?::\d*)*(?:;(\d*)(?::(\d+))?)?(?:;[\d:]*)?u/);
+  const mok = s.match(/^\x1b\[27;(\d+);(\d+)~/);
+  if (csiU || mok) {
+    const code = Number(csiU ? csiU[1] : mok[2]);
+    const mods = Number((csiU ? csiU[2] : mok[1]) || 1) - 1;
+    if (csiU?.[3] === "3") return undefined; // key release
+    const ch = String.fromCodePoint(code);
+    if (code === 27 || ((mods & 4) && ch === "c")) return null; // esc / ctrl+c
+    return mods & 2 ? `M-${ch}` : ch;
+  }
+  if (s.startsWith("\x1b") && s.length > 1) return `M-${s[1]}`;
+  if (s === "\x03" || s === "q") return null; // ctrl+c / q
+  const ch = [...s][0];
+  return ch in OPTION_DIGITS ? `M-${OPTION_DIGITS[ch]}` : ch;
+}
+
+// A lone ESC is cancel (after a short wait in case it's the start of a split
+// alt chord).
 function readKey() {
   return new Promise((resolve) => {
     const stdin = process.stdin;
@@ -124,9 +148,8 @@ function readKey() {
         escTimer = setTimeout(() => finish(null), 60);
         return;
       }
-      if (s.startsWith(ESC) && s.length > 1) return finish(`M-${s[1]}`);
-      if (s === "\x03" || s === "q") return finish(null); // ctrl+c / q
-      finish(s[0]);
+      const key = decodeKey(s);
+      if (key !== undefined) finish(key);
     };
     stdin.on("data", onData);
   });
