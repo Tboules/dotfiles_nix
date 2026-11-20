@@ -30,6 +30,9 @@
     };
   };
 
+  # Display may sleep, but the machine never idle-sleeps so long-running agents keep going.
+  power.sleep.computer = "never";
+
   nix-homebrew = {
     enable = true;
     user = username;
@@ -58,6 +61,7 @@
       "microsoft-teams"
       "opensuperwhisper"
       "datagrip"
+      "vercel"
     ];
   };
 }
